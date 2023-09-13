@@ -21,6 +21,16 @@ export const SidebarTheme = createTheme({
     MuiSvgIcon: {
       variants: [
         {
+          props: { className: "msgSendBtn" },
+          style: {
+            ":disabled": {
+              color: "#000",
+            },
+            height: "20px",
+            cursor: "pointer",
+          },
+        },
+        {
           props: { className: "profileBackButton" },
           style: {
             cursor: "pointer",

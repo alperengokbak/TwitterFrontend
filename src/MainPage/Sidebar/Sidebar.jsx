@@ -61,7 +61,11 @@ export const Sidebar = () => {
           text="Notifications"
           link="#"
         />
-        <SidebarOptions Icon={MailOutlineIcon} text="Messages" />
+        <SidebarOptions
+          Icon={MailOutlineIcon}
+          text="Messages"
+          link="/messages"
+        />
         <SidebarOptions Icon={ListAltIcon} text="Lists" link="#" />
         <SidebarOptions
           Icon={BookmarkBorderIcon}

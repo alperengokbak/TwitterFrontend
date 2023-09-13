@@ -16,7 +16,9 @@ import { CommentScreen } from "./MainPage/CommentScreen/CommentScreen";
 import { Communities } from "./MainPage/Sidebar/Communities";
 import { Bookmarks } from "./MainPage/Sidebar/Bookmarks";
 import { Explore } from "./MainPage/Explore/Explore";
+import { Message } from "./MainPage/Message/Message";
 
+// TODO - Add snackbar for delete, add, and edit processes.
 export const App = () => {
   const { user, setUser } = useContext(AuthContext);
 
@@ -94,6 +96,14 @@ export const App = () => {
           element={
             <Layouts>
               <Explore />
+            </Layouts>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <Layouts>
+              <Message />
             </Layouts>
           }
         />

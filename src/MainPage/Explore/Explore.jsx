@@ -16,7 +16,8 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { PopoverScreen } from "./PopoverScreen";
 import { SettingsModal } from "./SettingsModal";
 
-// TODO - Resim üstündeki yazıya bak.
+// TODO - Check the image that on the image.
+// TODO - Does not increase size of Popover.
 
 export const Explore = () => {
   const [textValue, setTextValue] = React.useState("");
@@ -223,29 +224,20 @@ export const Explore = () => {
           </Paper>
         </Grid>
       </Stack>
-      <Stack maxWidth="523px" width="100%">
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          disableAutoFocus
-          disableEnforceFocus
-          slotProps={{
-            paper: {
-              style: {
-                width: "28%",
-              },
-            },
-          }}
-        >
-          <PopoverScreen />
-        </Popover>
-      </Stack>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        disableAutoFocus
+        disableEnforceFocus
+      >
+        <PopoverScreen />
+      </Popover>
       <Modal open={openSettingsModal} onClose={handleCloseSettingsModal}>
         <Box
           sx={{

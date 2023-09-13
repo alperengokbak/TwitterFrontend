@@ -1,7 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 
-// TODO - Popover büyümüyor.
 export const PopoverScreen = () => {
   return (
     <Stack width="100%" direction="row" justifyContent="space-between">

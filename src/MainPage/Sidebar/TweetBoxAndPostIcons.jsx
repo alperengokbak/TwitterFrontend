@@ -67,6 +67,19 @@ export const TweetBoxIcon = ({ text, Icon, handleOpen }) => {
   );
 };
 
+export const MessagesIcon = ({ text, Icon, handleOpen }) => {
+  return (
+    <SvgIcon
+      title="media"
+      aria-label={text}
+      className="TweetBoxIcon"
+      onClick={handleOpen}
+    >
+      <Icon />
+    </SvgIcon>
+  );
+};
+
 export const PostComponentIcon = ({
   text,
   Icon,
