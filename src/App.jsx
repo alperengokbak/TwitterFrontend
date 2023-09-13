@@ -36,8 +36,6 @@ export const App = () => {
     return null;
   }
   if (user === null) {
-    console.log(user);
-
     return (
       <Router>
         <Routes>

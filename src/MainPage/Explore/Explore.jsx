@@ -9,10 +9,12 @@ import {
   Box,
   Popover,
   useMediaQuery,
+  Modal,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { PopoverScreen } from "./PopoverScreen";
+import { SettingsModal } from "./SettingsModal";
 
 // TODO - Resim üstündeki yazıya bak.
 
@@ -31,6 +33,10 @@ export const Explore = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const [openSettingsModal, setOpenSettingsModal] = React.useState(false);
+  const handleOpenSettingsModal = () => setOpenSettingsModal(true);
+  const handleCloseSettingsModal = () => setOpenSettingsModal(false);
 
   const handleTrend = async () => {
     try {
@@ -67,6 +73,7 @@ export const Explore = () => {
         justifyItems="space-between"
       >
         <TextField
+          className="exploreSearchBar"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -103,9 +110,7 @@ export const Explore = () => {
               borderRadius: "50%",
             },
           }}
-          onClick={() => {
-            alert("Settings");
-          }}
+          onClick={handleOpenSettingsModal}
         />
       </Stack>
       <Stack p="4px 0px 4px 0px">
@@ -218,29 +223,46 @@ export const Explore = () => {
           </Paper>
         </Grid>
       </Stack>
-      <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        disableAutoFocus
-        disableEnforceFocus
-        slotProps={{
-          paper: {
-            style: {
-              width: "530px",
+      <Stack maxWidth="523px" width="100%">
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          disableAutoFocus
+          disableEnforceFocus
+          slotProps={{
+            paper: {
+              style: {
+                width: "28%",
+              },
             },
-          },
-        }}
-      >
-        <Typography sx={{ p: 2 }}>
+          }}
+        >
           <PopoverScreen />
-        </Typography>
-      </Popover>
+        </Popover>
+      </Stack>
+      <Modal open={openSettingsModal} onClose={handleCloseSettingsModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "650px",
+            height: "600px",
+            bgcolor: "background.paper",
+            borderRadius: "20px",
+            boxShadow: 24,
+          }}
+        >
+          <SettingsModal handleCloseSettingsModal={handleCloseSettingsModal} />
+        </Box>
+      </Modal>
     </Stack>
   );
 };

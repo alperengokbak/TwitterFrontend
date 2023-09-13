@@ -5,7 +5,7 @@ import React from "react";
 export const PopoverScreen = () => {
   return (
     <Stack width="100%" direction="row" justifyContent="space-between">
-      <Typography variant="h6" fontWeight="bold">
+      <Typography variant="body1" fontWeight="bold">
         Recent
       </Typography>
       <Button className="popoverButton" variant="contained">
