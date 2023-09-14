@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Avatar, Typography, IconButton } from "@mui/material";
+import { Box, Avatar, Typography, IconButton, Stack } from "@mui/material";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
 import { useNavigate } from "react-router-dom";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -69,41 +69,42 @@ export const BasicMenu = () => {
   const { user, setUser } = useContext(AuthContext);
 
   return (
-    <Box
-      bgcolor="#FFFFFF"
-      padding="10px"
-      borderRadius="20px"
-      style={{ cursor: "pointer" }}
-    >
-      <Box display="flex" alignItems="center">
-        <Box display="flex" alignItems="space-between">
-          <Avatar src={user.profile_picture} alt="Profile Photo" />
-          <Box display="flex" flexDirection="column" paddingLeft={1}>
-            <Typography variant="subtitle2">
-              {user.firstName} {user.lastName}
-            </Typography>
-            <Typography variant="body2" component="span" color="gray">
-              @{user.username}
-            </Typography>
-          </Box>
-          <Box paddingLeft="20px">
-            <IconButton
-              aria-label="exit"
-              onClick={() => {
-                setUser(null);
-                localStorage.removeItem("token");
-                navigate("/login");
-              }}
-              sx={{
-                borderRadius: "50%",
-                color: "#000000",
-              }}
-            >
-              <ExitToAppIcon />
-            </IconButton>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+    <Stack direction="row" width="100%" maxWidth="240px" mr={5} mb={2.5}>
+      <Stack
+        direction="row"
+        height="100%"
+        width="100%"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          cursor: "pointer",
+          padding: "5px",
+          "&:hover": {
+            backgroundColor: "#E8F5FE",
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <Avatar src={user.profile_picture} />
+        <Stack mr={6}>
+          <Typography variant="body2" fontWeight="bold">
+            {user.firstName} {user.lastName}
+          </Typography>
+          <Typography variant="body2">@{user.username}</Typography>
+        </Stack>
+        <ExitToAppIcon
+          aria-label="exit"
+          onClick={() => {
+            setUser(null);
+            localStorage.removeItem("token");
+            navigate("/login");
+          }}
+          sx={{
+            borderRadius: "50%",
+            color: "#000000",
+          }}
+        />
+      </Stack>
+    </Stack>
   );
 };

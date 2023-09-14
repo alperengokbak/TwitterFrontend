@@ -27,9 +27,23 @@ export const SidebarOptions = ({ text, Icon, link, onClick }) => {
           <Typography variant="subtitle1">{text}</Typography>
         </TwitterLink>
       ) : (
-        <IconButton aria-label="SidebarIconsForMobile">
-          <Icon />
-        </IconButton>
+        <TwitterLink
+          onClick={() => {
+            onClick();
+          }}
+          sx={{
+            my: 0.5,
+          }}
+          to={`${link}`}
+        >
+          <Icon
+            style={{
+              padding: "6px",
+              fontSize: "30px",
+              marginRight: "14px",
+            }}
+          />{" "}
+        </TwitterLink>
       )}
     </Stack>
   );

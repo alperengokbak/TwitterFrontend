@@ -6,15 +6,15 @@ export const Layouts = ({ children }) => {
   return (
     <Container maxWidth="lg">
       <Grid container justifyContent={"center"} height="100vh">
-        <Grid item xs={2} sm={2} md={3.5} lg={2.2} xl={2.2}>
+        <Grid item xs={1} sm={1} md={2} lg={3} xl={2.2}>
           <Sidebar />
         </Grid>
         <Grid
           item
-          xs={10}
-          sm={10}
-          md={8.5}
-          lg={children.type.name === "Message" ? 9.8 : 6.3}
+          xs={11}
+          sm={11}
+          md={6.5}
+          lg={5.5}
           xl={children.type.name === "Message" ? 9.8 : 6.3}
         >
           {children}
@@ -24,10 +24,10 @@ export const Layouts = ({ children }) => {
             item
             sx={{
               display: {
-                md: "none",
                 lg: "block",
               },
             }}
+            md={3.5}
             lg={3.5}
             xl={3.5}
           >

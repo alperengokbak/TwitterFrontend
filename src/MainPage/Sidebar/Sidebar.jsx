@@ -23,19 +23,22 @@ export const Sidebar = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  //  TODO - Sidebar'ı düzelt.
+  //  TODO - Mesajlar kısmını düzelt.
+  //  TODO - Layout component'ini ayarla.
+
   return (
     <Stack
-      direction="column"
+      height="100vh"
       borderRight="2px solid #e6ecf0"
       alignItems="flex-end"
       justifyContent="space-between"
-      spacing={1}
-      height={isDesktop ? "100%" : "45%"}
+      justifyItems="space-between"
     >
       <Stack
         sx={{
           marginTop: "10px",
-          paddingRight: isDesktop ? "40px" : "0",
+          paddingRight: isDesktop ? "40px" : null,
         }}
       >
         <TwitterIcon
@@ -91,9 +94,7 @@ export const Sidebar = () => {
         <SidebarOptions Icon={MoreHorizIcon} text="More" link="#" />
         <PostScreen />
       </Stack>
-      <Stack paddingRight={isDesktop ? "30px" : "0"}>
-        {isDesktop ? <BasicMenu /> : <BasicMenuForMobile />}
-      </Stack>
+      {isDesktop ? <BasicMenu /> : <BasicMenuForMobile />}
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{

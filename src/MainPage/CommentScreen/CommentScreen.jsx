@@ -65,6 +65,8 @@ export const CommentScreen = () => {
 
   const fileInputRef = React.useRef(null);
 
+  const colorGray = "rgb(83, 100, 113)";
+
   const postComments = async (imageUrl, tweet) => {
     try {
       const response = await axios.post("http://localhost:3000/tweet/comment", {
@@ -577,7 +579,7 @@ export const CommentScreen = () => {
                 </Typography>
                 <Typography
                   variant="body2"
-                  color="gray"
+                  color={colorGray}
                   onClick={() => {
                     navigate(`/${username}`);
                   }}
@@ -623,7 +625,7 @@ export const CommentScreen = () => {
             variant="body1"
             sx={{
               mt: 2,
-              color: "gray",
+              color: { colorGray },
               fontSize: "15px",
               cursor: "pointer",
               "&:hover": {
@@ -654,7 +656,7 @@ export const CommentScreen = () => {
               </Typography>
               <Typography
                 variant="body2"
-                color="gray"
+                color={colorGray}
                 mr={1}
                 sx={{
                   cursor: "pointer",
@@ -679,7 +681,7 @@ export const CommentScreen = () => {
               </Typography>
               <Typography
                 variant="body2"
-                color="gray"
+                color={colorGray}
                 mr={1}
                 sx={{
                   cursor: "pointer",
@@ -704,7 +706,7 @@ export const CommentScreen = () => {
               </Typography>
               <Typography
                 variant="body2"
-                color="gray"
+                color={colorGray}
                 sx={{
                   cursor: "pointer",
                   "&:hover": {
@@ -783,7 +785,7 @@ export const CommentScreen = () => {
           <Typography
             variant="body2"
             sx={{
-              color: "gray",
+              color: { colorGray },
               cursor: "pointer",
               fontSize: "15px",
               mb: 2,

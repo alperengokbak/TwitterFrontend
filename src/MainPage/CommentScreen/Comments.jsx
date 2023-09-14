@@ -118,7 +118,7 @@ function Comments({
                       component="span"
                       alignItems="center"
                       sx={{
-                        color: "gray",
+                        color: "rgb(83, 100, 113)",
                         fontSize: "14px",
                         fontWeight: "400",
                         cursor: "pointer",
