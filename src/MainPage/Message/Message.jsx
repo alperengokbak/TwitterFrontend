@@ -2,6 +2,7 @@ import React from "react";
 import { Stack, Divider, useMediaQuery } from "@mui/material";
 import { UserTabs } from "./UserTabs";
 import { MessagesPage } from "./MessagesPage";
+import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
 
 const myDivider = (
   <Divider
@@ -14,7 +15,8 @@ const myDivider = (
 );
 
 export const Message = () => {
-  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  const { isDesktop } = React.useContext(AuthContext);
+
   return (
     <Stack direction="row" height="100vh">
       {isDesktop ? <UserTabs /> : null}

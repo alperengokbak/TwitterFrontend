@@ -20,12 +20,9 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
 export const Bookmarks = () => {
   const [posts, setPosts] = React.useState([]);
   const { user } = React.useContext(AuthContext);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [anchorElPost, setAnchorElPost] = React.useState(null);
-  const openPost = Boolean(anchorElPost);
-
-  console.log(posts.length);
 
   const [state, setState] = React.useState({
     openSnackbar: false,
@@ -46,16 +43,8 @@ export const Bookmarks = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClickPost = (event) => {
-    setAnchorElPost(event.currentTarget);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleClosePost = () => {
-    setAnchorElPost(null);
   };
 
   React.useEffect(() => {
@@ -269,6 +258,7 @@ export const Bookmarks = () => {
               retweets={post.retweets}
               image_url={post.image_url}
               id={post.id}
+              user_id={post.user_id}
               isLiked={post.liked}
               isRetweeted={post.retweeted}
               handleDeletePost={handleDeletePost}
@@ -323,27 +313,6 @@ export const Bookmarks = () => {
           },
         }}
       />
-      <Menu anchorEl={anchorElPost} open={openPost} onClose={handleClosePost}>
-        {user.username !== posts[0]?.username ? (
-          <Stack>
-            <MenuItem onClick={handleClosePost}>
-              Not interested in this post
-            </MenuItem>
-            <MenuItem onClick={handleClosePost}>
-              Follow @{posts[0]?.username}
-            </MenuItem>
-          </Stack>
-        ) : (
-          <MenuItem
-            onClick={() => {
-              handleDeletePost(id);
-              handleClosePost();
-            }}
-          >
-            Delete this post
-          </MenuItem>
-        )}
-      </Menu>
     </Grid>
   );
 };

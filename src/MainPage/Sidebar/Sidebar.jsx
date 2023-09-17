@@ -23,10 +23,6 @@ export const Sidebar = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  //  TODO - Sidebar'ı düzelt.
-  //  TODO - Mesajlar kısmını düzelt.
-  //  TODO - Layout component'ini ayarla.
-
   return (
     <Stack
       height="100vh"

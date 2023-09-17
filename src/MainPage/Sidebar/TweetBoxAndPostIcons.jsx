@@ -163,8 +163,10 @@ export const CommentComponentIcon = ({
   Icon,
   likes,
   retweets,
+  retweeted,
   handleLikeComment,
   handleRetweetComment,
+  handleClickUpload,
 }) => {
   return (
     <Stack flexDirection="row">
@@ -176,21 +178,16 @@ export const CommentComponentIcon = ({
             handleLikeComment();
           } else if (text === "Bookmark") {
           } else if (text === "Upload") {
+            handleClickUpload(event);
           }
           event.stopPropagation();
         }}
         sx={{
-          color: () => {
-            if (text === "Retweet") {
-              return "green";
-            } else if (text === "Like") {
-              return "red";
-            } else {
-              return "gray";
-            }
-          },
+          color: colorPicker(text, retweeted, "default", retweets),
           "&:hover": {
-            color: text === "Retweet" ? "green" : "red",
+            color: colorPicker(text, retweeted, "hover", retweets),
+            backgroundColor: colorPicker(text, retweeted, "background"),
+            borderRadius: "50%",
           },
         }}
         aria-label={text}

@@ -11,6 +11,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import { PostComponentIcon } from "../Sidebar/TweetBoxAndPostIcons";
 import { CurrentDateFormat } from "../Home/CurrentDateFormat";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
@@ -27,6 +28,7 @@ function BookmarksTweets({
   profile_picture,
   image_url,
   id,
+  user_id,
   isLiked,
   isRetweeted,
   handleDeletePost,
@@ -37,8 +39,15 @@ function BookmarksTweets({
 }) {
   const navigate = useNavigate();
   const { user } = React.useContext(AuthContext);
+
+  const [followInformation, setFollowInformation] = React.useState([]);
+  const followed_user_id = user_id;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const [anchorElUpload, setAnchorElUpload] = React.useState(null);
+  const openUpload = Boolean(anchorElUpload);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,6 +55,51 @@ function BookmarksTweets({
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickUpload = (event) => {
+    setAnchorElUpload(event.currentTarget);
+  };
+
+  const handleCloseUpload = () => {
+    setAnchorElUpload(null);
+  };
+
+  const handleFollow = async (followed_user_id) => {
+    const response = await axios.post(`http://localhost:3000/profile/follow`, {
+      follower_user_id: user.id,
+      followed_user_id: followed_user_id,
+    });
+    if (response.status === 200) {
+      setFollowInformation((prevUserInformation) => ({
+        ...prevUserInformation,
+        following: true,
+        followers: parseInt(prevUserInformation.followers + 1),
+      }));
+    } else {
+      console.log("Error");
+    }
+  };
+
+  const handleUnfollow = async (followed_user_id) => {
+    const response = await axios.delete(
+      `http://localhost:3000/profile/unfollow`,
+      {
+        data: {
+          follower_user_id: user.id,
+          followed_user_id: followed_user_id,
+        },
+      }
+    );
+    if (response.status === 200) {
+      setFollowInformation((prevUserInformation) => ({
+        ...prevUserInformation,
+        following: false,
+        followers: parseInt(prevUserInformation.followers - 1),
+      }));
+    } else {
+      console.log("Error");
+    }
   };
 
   return (
@@ -206,7 +260,11 @@ function BookmarksTweets({
                     }}
                   />
                   <PostComponentIcon text="View" Icon={BarChartIcon} />
-                  <PostComponentIcon text="Upload" Icon={UploadIcon} />
+                  <PostComponentIcon
+                    handleClickUpload={handleClickUpload}
+                    text="Upload"
+                    Icon={UploadIcon}
+                  />
                 </Stack>
               </Grid>
             </Grid>
@@ -219,7 +277,25 @@ function BookmarksTweets({
             <MenuItem onClick={handleClose}>
               Not interested in this post
             </MenuItem>
-            <MenuItem onClick={handleClose}>Follow @{username}</MenuItem>
+            {!followInformation.following ? (
+              <MenuItem
+                onClick={() => {
+                  handleFollow(followed_user_id);
+                  handleClose();
+                }}
+              >
+                Follow @{username}
+              </MenuItem>
+            ) : (
+              <MenuItem
+                onClick={() => {
+                  handleUnfollow(followed_user_id);
+                  handleClose();
+                }}
+              >
+                Unfollow @{username}
+              </MenuItem>
+            )}
           </Stack>
         ) : (
           <MenuItem
@@ -231,6 +307,28 @@ function BookmarksTweets({
             Delete this post
           </MenuItem>
         )}
+      </Menu>
+      <Menu
+        anchorEl={anchorElUpload}
+        open={openUpload}
+        onClose={handleCloseUpload}
+      >
+        <MenuItem
+          onClick={() => {
+            navigator.clipboard.writeText(
+              location.protocol +
+                "//" +
+                location.host +
+                "/" +
+                username +
+                "/status/" +
+                id
+            );
+            handleCloseUpload();
+          }}
+        >
+          Copy Link
+        </MenuItem>
       </Menu>
     </Stack>
   );

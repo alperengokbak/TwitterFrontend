@@ -34,6 +34,7 @@ function Comments({
   handleRetweetComment,
   handleRemoveRetweetComment,
   handleDeleteComment,
+  handleClickUpload,
   handleFollow,
   handleUnfollow,
   followInformation,
@@ -205,7 +206,11 @@ function Comments({
                     }}
                   />
                   <CommentComponentIcon text="View" Icon={BarChartIcon} />
-                  <CommentComponentIcon text="Upload" Icon={UploadIcon} />
+                  <CommentComponentIcon
+                    text="Upload"
+                    Icon={UploadIcon}
+                    handleClickUpload={handleClickUpload}
+                  />
                 </Stack>
               </Grid>
             </Grid>

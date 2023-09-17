@@ -6,7 +6,6 @@ import {
   IconButton,
   Typography,
   Avatar,
-  useMediaQuery,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SendIcon from "@mui/icons-material/Send";
@@ -15,11 +14,28 @@ import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
 import EmojiEmotionsOutlinedIcon from "@mui/icons-material/EmojiEmotionsOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { MessagesIcon } from "../Sidebar/TweetBoxAndPostIcons";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
+import io from "socket.io-client";
 
 export const MessagesPage = () => {
-  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up("md"));
-  const [input, setInput] = React.useState("");
-  const sendMessage = () => {};
+  const socket = io.connect("http://localhost:3000");
+  const { user, isDesktop } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+  const [message, setMessage] = React.useState("");
+  const [messageRecieved, setMessageRecieved] = React.useState("");
+
+  const sendMessage = () => {
+    socket.emit("send_message", { message });
+    setMessage("");
+  };
+
+  React.useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setMessageRecieved(data.message);
+    });
+  }, [socket]);
+
   return (
     <Stack width={!isDesktop ? "85%" : "100%"}>
       <Stack
@@ -70,6 +86,9 @@ export const MessagesPage = () => {
         <Stack
           width="100%"
           height="310px"
+          onClick={() => {
+            navigate(`/${user.username}`);
+          }}
           sx={{
             cursor: "pointer",
             "&:hover": {
@@ -125,13 +144,14 @@ export const MessagesPage = () => {
           height="57vh"
           borderTop="1px solid rgb(239, 243, 244)"
         >
-          <h4>Messages</h4>
+          <h4>Message: </h4>
+          {messageRecieved}
         </Stack>
       </Stack>
       <TextField
-        value={input}
+        value={message}
         onChange={(e) => {
-          setInput(e.target.value);
+          setMessage(e.target.value);
         }}
         sx={{
           m: "6px 10px 0px 10px",
@@ -165,7 +185,7 @@ export const MessagesPage = () => {
             <InputAdornment position="end">
               <IconButton
                 size="small"
-                disabled={!input}
+                disabled={!message}
                 sx={{
                   color: "rgb(29, 155, 240)",
                   "&:hover": {

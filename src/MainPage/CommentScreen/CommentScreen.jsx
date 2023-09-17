@@ -934,6 +934,7 @@ export const CommentScreen = () => {
                 handleUnlikeComment={handleUnlikeComment}
                 handleRetweetComment={handleRetweetComment}
                 handleRemoveRetweetComment={handleRemoveRetweetComment}
+                handleClickUpload={handleClickUpload}
                 handleFollow={handleFollow}
                 handleUnfollow={handleUnfollow}
                 followInformation={followInformation}
