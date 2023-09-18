@@ -75,8 +75,12 @@ export const Message = () => {
         />
       )}
       {isDesktop ? myDivider : null}
-      {/* <MessagesPage messagePageInfo={messagePageInfo} />
-      {myDivider} */}
+      {isDesktop ? (
+        <Stack direction="row">
+          <MessagesPage messagePageInfo={messagePageInfo} />
+          {myDivider}
+        </Stack>
+      ) : null}
     </Stack>
   );
 };
