@@ -10,7 +10,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-export const UserTabs = ({ userTabsInfo }) => {
+export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
   const [inputSearch, setInputSearch] = React.useState("");
   return (
     <Stack width="70%">
@@ -71,6 +71,9 @@ export const UserTabs = ({ userTabsInfo }) => {
       <Stack
         direction="row"
         alignItems="center"
+        onClick={() => {
+          setHideMessagePage(false);
+        }}
         sx={{
           height: "55px",
           cursor: "pointer",

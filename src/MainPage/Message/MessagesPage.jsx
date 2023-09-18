@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
 import io from "socket.io-client";
 
-export const MessagesPage = ({ messagePageInfo }) => {
+export const MessagesPage = ({ messagePageInfo, setHideMessagePage }) => {
   const navigate = useNavigate();
   const socket = io.connect("http://localhost:3000");
   const { user, isDesktop } = React.useContext(AuthContext);
@@ -52,13 +52,17 @@ export const MessagesPage = ({ messagePageInfo }) => {
           {!isDesktop ? (
             <ArrowBackIcon
               onClick={() => {
-                window.history.back();
+                setHideMessagePage(true);
               }}
               sx={{
                 cursor: "pointer",
                 height: "20px",
                 width: "20px",
                 mr: 5,
+                ":hover": {
+                  backgroundColor: "rgba(29, 155, 240, 0.1)",
+                  borderRadius: "50%",
+                },
               }}
             />
           ) : null}

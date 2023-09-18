@@ -19,6 +19,7 @@ export const Message = () => {
   const { isDesktop, user } = React.useContext(AuthContext);
   const [userTabsInfo, setUserTabsInfo] = React.useState([]);
   const [messagePageInfo, setMessagePageInfo] = React.useState([]);
+  const [hideMessagePage, setHideMessagePage] = React.useState(false);
 
   const handleUserTabsInformation = async () => {
     try {
@@ -57,10 +58,25 @@ export const Message = () => {
 
   return (
     <Stack direction="row" height="100dvh">
-      {isDesktop ? <UserTabs userTabsInfo={userTabsInfo} /> : null}
+      {isDesktop ? (
+        <UserTabs
+          userTabsInfo={userTabsInfo}
+          setHideMessagePage={setHideMessagePage}
+        />
+      ) : hideMessagePage ? (
+        <UserTabs
+          userTabsInfo={userTabsInfo}
+          setHideMessagePage={setHideMessagePage}
+        />
+      ) : (
+        <MessagesPage
+          messagePageInfo={messagePageInfo}
+          setHideMessagePage={setHideMessagePage}
+        />
+      )}
       {isDesktop ? myDivider : null}
-      <MessagesPage messagePageInfo={messagePageInfo} />
-      {myDivider}
+      {/* <MessagesPage messagePageInfo={messagePageInfo} />
+      {myDivider} */}
     </Stack>
   );
 };
