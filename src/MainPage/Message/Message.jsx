@@ -3,6 +3,7 @@ import { Stack, Divider, useMediaQuery } from "@mui/material";
 import { UserTabs } from "./UserTabs";
 import { MessagesPage } from "./MessagesPage";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
+import axios from "axios";
 
 const myDivider = (
   <Divider
@@ -15,13 +16,50 @@ const myDivider = (
 );
 
 export const Message = () => {
-  const { isDesktop } = React.useContext(AuthContext);
+  const { isDesktop, user } = React.useContext(AuthContext);
+  const [userTabsInfo, setUserTabsInfo] = React.useState([]);
+  const [messagePageInfo, setMessagePageInfo] = React.useState([]);
+
+  const handleUserTabsInformation = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/profile/${user.username}`
+      );
+      if (response.status === 200) {
+        setUserTabsInfo(response.data);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const handleMessagePageInformation = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/profile/${user.username}`
+      );
+      if (response.status === 200) {
+        setMessagePageInfo(response.data);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    handleUserTabsInformation();
+    handleMessagePageInformation();
+  }, []);
 
   return (
-    <Stack direction="row" height="100vh">
-      {isDesktop ? <UserTabs /> : null}
+    <Stack direction="row" height="100dvh">
+      {isDesktop ? <UserTabs userTabsInfo={userTabsInfo} /> : null}
       {isDesktop ? myDivider : null}
-      <MessagesPage />
+      <MessagesPage messagePageInfo={messagePageInfo} />
       {myDivider}
     </Stack>
   );

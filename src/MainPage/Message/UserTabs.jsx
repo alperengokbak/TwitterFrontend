@@ -10,7 +10,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-export const UserTabs = () => {
+export const UserTabs = ({ userTabsInfo }) => {
   const [inputSearch, setInputSearch] = React.useState("");
   return (
     <Stack width="70%">
@@ -52,12 +52,7 @@ export const UserTabs = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                width="100px"
-                mr={2}
-              >
+              <Stack direction="row" justifyContent="center" width="100%">
                 <SearchOutlinedIcon
                   sx={{
                     height: "20px",
@@ -84,12 +79,14 @@ export const UserTabs = () => {
           borderRight: "2px solid #1DA1F2",
         }}
       >
-        <Avatar />
+        <Avatar src={userTabsInfo.profile_picture} />
         <Stack ml={1.5}>
           <Stack direction="row" alignItems="center">
-            <Typography>Anonymous</Typography>
+            <Typography>
+              {userTabsInfo.firstname} {userTabsInfo.lastname}
+            </Typography>
             <Typography variant="span" color="gray" ml={0.5}>
-              @MacosTen_1990 · 1h
+              @{userTabsInfo.username} · 1h
             </Typography>
           </Stack>
           <Typography>Follows you</Typography>

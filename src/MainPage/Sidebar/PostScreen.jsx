@@ -12,11 +12,10 @@ export const PostScreen = () => {
 
   return (
     <Stack
-      marginTop={"15px"}
+      marginTop={2}
       borderRadius="30px"
-      textTransform={"inherit"}
-      border={"none"}
-      marginLeft={isDesktop ? "0px" : "4px"}
+      textTransform="inherit"
+      border="none"
     >
       {isDesktop ? (
         <Button
@@ -28,7 +27,11 @@ export const PostScreen = () => {
           Post
         </Button>
       ) : (
-        <IconButton aria-label="send" title="Send" onClick={handleOpen}>
+        <IconButton
+          className="sidebarSendBtn"
+          title="Send"
+          onClick={handleOpen}
+        >
           <SendIcon />
         </IconButton>
       )}

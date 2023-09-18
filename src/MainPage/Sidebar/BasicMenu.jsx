@@ -23,21 +23,18 @@ export const BasicMenuForMobile = () => {
     setAnchorEl(null);
   };
   return (
-    <React.Fragment>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          padding: "5px",
-          marginBottom: "5px",
-        }}
-      >
-        <Tooltip title="Accounts">
-          <IconButton onClick={handleClick} size="small">
-            <Avatar src={user.profile_picture} sx={{ width: 40, height: 40 }} />
-          </IconButton>
-        </Tooltip>
-      </Box>
+    <Stack
+      width="100%"
+      direction="row"
+      justifyContent="flex-start"
+      mb={0.5}
+      padding={1.5}
+    >
+      <Tooltip title="Accounts">
+        <IconButton onClick={handleClick} size="small">
+          <Avatar src={user.profile_picture} sx={{ width: 40, height: 40 }} />
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -60,7 +57,7 @@ export const BasicMenuForMobile = () => {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </Stack>
   );
 };
 
@@ -86,7 +83,7 @@ export const BasicMenu = () => {
         }}
       >
         <Avatar src={user.profile_picture} />
-        <Stack mr={6}>
+        <Stack mr={6} ml={1.5}>
           <Typography variant="body2" fontWeight="bold">
             {user.firstName} {user.lastName}
           </Typography>

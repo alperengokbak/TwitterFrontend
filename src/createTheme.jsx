@@ -216,13 +216,15 @@ export const SidebarTheme = createTheme({
           },
         },
         {
-          props: { "aria-label": "send" },
+          props: { className: "sidebarSendBtn" },
           style: {
             color: "#1DA1F2",
             background: "#FFFFFF",
             border: "none",
             borderRadius: "50px",
             textTransform: "inherit",
+            justifyContent: "flex-start",
+            marginLeft: "10px",
             "&:hover": {
               color: "#000000",
             },

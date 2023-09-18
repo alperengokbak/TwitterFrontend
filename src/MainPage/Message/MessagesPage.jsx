@@ -18,10 +18,11 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
 import io from "socket.io-client";
 
-export const MessagesPage = () => {
+export const MessagesPage = ({ messagePageInfo }) => {
+  const navigate = useNavigate();
   const socket = io.connect("http://localhost:3000");
   const { user, isDesktop } = React.useContext(AuthContext);
-  const navigate = useNavigate();
+
   const [message, setMessage] = React.useState("");
   const [messageRecieved, setMessageRecieved] = React.useState("");
 
@@ -62,7 +63,7 @@ export const MessagesPage = () => {
             />
           ) : null}
           <Typography variant="body1" fontWeight="bold">
-            Username
+            {messagePageInfo.username}
           </Typography>
         </Stack>
         <InfoOutlinedIcon
@@ -98,6 +99,7 @@ export const MessagesPage = () => {
         >
           <Stack alignItems="center" p={2}>
             <Avatar
+              src={messagePageInfo.profile_picture}
               sx={{
                 height: "60px",
                 width: "60px",
@@ -105,20 +107,22 @@ export const MessagesPage = () => {
             />
             <Stack>
               <Typography variant="body2" fontWeight="bold" textAlign="center">
-                Full Name
+                {messagePageInfo.firstname} {messagePageInfo.lastname}
               </Typography>
               <Typography variant="span" color="gray">
-                @Username
+                @{messagePageInfo.username}
               </Typography>
             </Stack>
             <Typography
               variant="body2"
+              textAlign="center"
+              width="80%"
               sx={{
                 mt: 1.5,
                 mb: 1,
               }}
             >
-              BIO
+              {messagePageInfo.bio}
             </Typography>
             <Typography
               variant="span"
@@ -126,25 +130,37 @@ export const MessagesPage = () => {
               fontSize="15px"
               mb={1}
             >
-              Creation Date - followers
+              {messagePageInfo.birthday
+                ? `Joined ${messagePageInfo.birthday}`
+                : "Joined 2021"}
             </Typography>
             <Typography
               variant="span"
               color="rgb(83, 100, 113)"
               fontSize="15px"
             >
-              Not followed by anyone you're following
+              {messagePageInfo.followers} Followers
             </Typography>
           </Stack>
         </Stack>
-
         <Stack
           width="100%"
           maxHeight="57vh"
           height="57vh"
           borderTop="1px solid rgb(239, 243, 244)"
         >
-          <h4>Message: </h4>
+          <Stack direction="row" width="100%" justifyContent="space-between">
+            <Stack justifyContent="flex-start" ml={2}>
+              <Typography>Message</Typography>
+              <Typography>Message</Typography>
+              <Typography>Message</Typography>
+            </Stack>
+            <Stack justifyContent="flex-end" justifyItems="flex-end" mr={2}>
+              <Typography>Message</Typography>
+              <Typography>Message</Typography>
+              <Typography>Message</Typography>
+            </Stack>
+          </Stack>
           {messageRecieved}
         </Stack>
       </Stack>
