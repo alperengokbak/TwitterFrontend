@@ -487,7 +487,7 @@ export const CommentScreen = () => {
   return (
     <Grid
       flexDirection="row"
-      height="100vh"
+      height="100dvh"
       overflow="scroll"
       minWidth="fit-content"
       webkitoverflowscrolling="touch"

@@ -35,7 +35,7 @@ export const Bookmarks = () => {
     setState({ ...newState, openSnackbar: true });
   };
 
-  const handleCloseSnackbar = (event, reason) => {
+  const handleCloseSnackbar = () => {
     setState({ ...state, openSnackbar: false });
   };
 

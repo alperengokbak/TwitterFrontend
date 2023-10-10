@@ -17,6 +17,7 @@ import { PostScreen } from "./PostScreen";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
 import { Verified } from "./Verified";
 
+// TODO - Add the isActivated state to the SidebarOptions component
 export const Sidebar = () => {
   const { isDesktop, user } = React.useContext(AuthContext);
   const [open, setOpen] = React.useState(false);

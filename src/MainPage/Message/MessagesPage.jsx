@@ -38,7 +38,7 @@ export const MessagesPage = ({ messagePageInfo, setHideMessagePage }) => {
   }, [socket]);
 
   return (
-    <Stack width={!isDesktop ? "85%" : "100%"}>
+    <Stack width="100%">
       <Stack
         direction="row"
         justifyItems="space-between"
@@ -153,16 +153,57 @@ export const MessagesPage = ({ messagePageInfo, setHideMessagePage }) => {
           height="57vh"
           borderTop="1px solid rgb(239, 243, 244)"
         >
-          <Stack direction="row" width="100%" justifyContent="space-between">
-            <Stack justifyContent="flex-start" ml={2}>
-              <Typography>Message</Typography>
-              <Typography>Message</Typography>
-              <Typography>Message</Typography>
+          <Stack width="100%">
+            <Stack
+              width="50%"
+              height="3dvh"
+              mt={2}
+              ml={2}
+              p={1.5}
+              sx={{
+                backgroundColor: "rgb(239, 243, 244)",
+                color: "rgb(83, 100, 113)",
+                borderTopLeftRadius: "20px",
+                borderTopRightRadius: "20px",
+                borderBottomLeftRadius: "none",
+                borderBottomRightRadius: "20px",
+              }}
+            >
+              <Typography>Test Message</Typography>
+              <Typography
+                sx={{
+                  textAlign: "right",
+                  fontSize: "12px",
+                }}
+              >
+                Alperen Gökbak - 18.09.2023
+              </Typography>
             </Stack>
-            <Stack justifyContent="flex-end" justifyItems="flex-end" mr={2}>
-              <Typography>Message</Typography>
-              <Typography>Message</Typography>
-              <Typography>Message</Typography>
+            <Stack direction="row" justifyContent="flex-end" mt={2}>
+              <Stack
+                width="50%"
+                height="3dvh"
+                mt={2}
+                mr={2}
+                p={1.5}
+                sx={{
+                  backgroundColor: "rgba(29, 155, 240)",
+                  color: "#FFF",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px",
+                  borderBottomLeftRadius: "20px",
+                }}
+              >
+                <Typography>Test Message</Typography>
+                <Typography
+                  sx={{
+                    textAlign: "right",
+                    fontSize: "12px",
+                  }}
+                >
+                  Alperen Gökbak - 18.09.2023
+                </Typography>
+              </Stack>
             </Stack>
           </Stack>
           {messageRecieved}

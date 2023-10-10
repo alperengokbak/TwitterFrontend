@@ -1,20 +1,21 @@
 import { createTheme } from "@mui/material/styles";
 
 const colors = {
-  primary: "#000000",
-  secondary: "#1DA1F2",
-  third: "#FFFFFF",
+  black: "#000000",
+  twitterBlue: "#1DA1F2",
+  white: "#FFFFFF",
+  spanGray: "rgb(83, 100, 113)",
 };
 export const SidebarTheme = createTheme({
   palette: {
     primary: {
-      main: colors.primary,
+      main: colors.black,
     },
     secondary: {
-      main: colors.secondary,
+      main: colors.twitterBlue,
     },
     third: {
-      main: colors.third,
+      main: colors.white,
     },
   },
   components: {
@@ -97,7 +98,7 @@ export const SidebarTheme = createTheme({
             padding: "3px",
             height: "20px",
             width: "20px",
-            color: colors.secondary,
+            color: colors.twitterBlue,
             "&:hover": {
               borderRadius: "20px",
               color: "#1DA1F2",
@@ -111,7 +112,7 @@ export const SidebarTheme = createTheme({
             padding: "3px",
             height: "20px",
             width: "20px",
-            color: colors.secondary,
+            color: colors.twitterBlue,
             "&:hover": {
               borderRadius: "20px",
               color: "#1DA1F2",
@@ -154,13 +155,13 @@ export const SidebarTheme = createTheme({
         {
           props: { className: "profileIconButton" },
           style: {
-            color: colors.primary,
+            color: colors.black,
           },
         },
         {
           props: { "aria-label": "close" },
           style: {
-            color: colors.primary,
+            color: colors.black,
             backgroundColor: "rgba(15, 20, 25, 0.75)",
             position: "absolute",
             backdropFilter: "blur(4px)",
@@ -179,7 +180,7 @@ export const SidebarTheme = createTheme({
         {
           props: { "aria-label": "closeForPostScreen" },
           style: {
-            color: colors.primary,
+            color: colors.black,
             backgroundColor: "rgba(15, 20, 25, 0.75)",
             position: "absolute",
             backdropFilter: "blur(4px)",
@@ -201,7 +202,7 @@ export const SidebarTheme = createTheme({
             fontSize: "27",
             padding: "6px",
             size: "10px",
-            color: colors.primary,
+            color: colors.black,
             "&:hover": {
               borderRadius: "20px",
             },
@@ -248,23 +249,38 @@ export const SidebarTheme = createTheme({
     MuiButton: {
       variants: [
         {
+          props: { className: "newMessageBtn" },
+          style: {
+            color: colors.white,
+            backgroundColor: colors.black,
+            fontWeight: "bold",
+            border: "none",
+            boxShadow: "none",
+            height: "35px",
+            "&:hover": {
+              backgroundColor: colors.white,
+              color: colors.black,
+            },
+          },
+        },
+        {
           props: { className: "popoverButton" },
           style: {
-            color: colors.secondary,
-            backgroundColor: colors.third,
+            color: colors.twitterBlue,
+            backgroundColor: colors.white,
             fontWeight: "400",
             border: "none",
             boxShadow: "none",
             height: "20px",
             "&:hover": {
-              backgroundColor: colors.third,
+              backgroundColor: colors.white,
             },
           },
         },
         {
           props: { className: "showMoreButton" },
           style: {
-            color: colors.secondary,
+            color: colors.twitterBlue,
             borderRadius: "0px",
             fontWeight: "400",
           },
@@ -295,10 +311,10 @@ export const SidebarTheme = createTheme({
           props: { className: "postScreen" },
           style: {
             borderRadius: "20px",
-            backgroundColor: colors.secondary,
+            backgroundColor: colors.twitterBlue,
             "&:hover": {
-              backgroundColor: colors.secondary,
-              color: colors.third,
+              backgroundColor: colors.twitterBlue,
+              color: colors.white,
             },
           },
         },
@@ -308,8 +324,8 @@ export const SidebarTheme = createTheme({
             height: "50px",
             width: "230px",
             "&:hover": {
-              backgroundColor: colors.secondary,
-              color: colors.third,
+              backgroundColor: colors.twitterBlue,
+              color: colors.white,
             },
           },
         },

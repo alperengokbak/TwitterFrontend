@@ -70,8 +70,6 @@ export const Explore = () => {
         }}
         flexDirection="row"
         alignItems="center"
-        justifyContent="space-between"
-        justifyItems="space-between"
       >
         <TextField
           className="exploreSearchBar"

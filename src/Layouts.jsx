@@ -5,7 +5,7 @@ import { Sidebar } from "./MainPage/Sidebar/Sidebar";
 export const Layouts = ({ children }) => {
   return (
     <Container maxWidth="lg">
-      <Grid container justifyContent={"center"} height="100vh">
+      <Grid container justifyContent={"center"} height="100dvh">
         <Grid item xs={1} sm={1} md={2} lg={3} xl={2.2}>
           <Sidebar />
         </Grid>

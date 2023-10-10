@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Divider, useMediaQuery } from "@mui/material";
+import { Stack, Divider } from "@mui/material";
 import { UserTabs } from "./UserTabs";
 import { MessagesPage } from "./MessagesPage";
 import { AuthContext } from "../../AuthenticationSystem/AuthenticationSystem";
@@ -62,17 +62,22 @@ export const Message = () => {
         <UserTabs
           userTabsInfo={userTabsInfo}
           setHideMessagePage={setHideMessagePage}
+          isDesktop={isDesktop}
         />
       ) : hideMessagePage ? (
         <UserTabs
           userTabsInfo={userTabsInfo}
           setHideMessagePage={setHideMessagePage}
+          isDesktop={isDesktop}
         />
       ) : (
-        <MessagesPage
-          messagePageInfo={messagePageInfo}
-          setHideMessagePage={setHideMessagePage}
-        />
+        <Stack direction="row" width="100%">
+          <MessagesPage
+            messagePageInfo={messagePageInfo}
+            setHideMessagePage={setHideMessagePage}
+          />
+          {myDivider}
+        </Stack>
       )}
       {isDesktop ? myDivider : null}
       {isDesktop ? (

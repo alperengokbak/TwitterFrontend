@@ -5,19 +5,32 @@ import {
   InputAdornment,
   Typography,
   Avatar,
+  Modal,
+  SvgIcon,
+  Fab,
 } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AttachEmailOutlinedIcon from "@mui/icons-material/AttachEmailOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { CreateConversation } from "./CreateConversation";
 
-export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
+export const UserTabs = ({ userTabsInfo, setHideMessagePage, isDesktop }) => {
   const [inputSearch, setInputSearch] = React.useState("");
+  const [isActiveButton, setIsActiveButton] = React.useState(false);
+
+  const [openConversation, setOpenConversation] = React.useState(false);
+  const handleStartConversation = () => setOpenConversation(true);
+  const handleCloseConversation = () => setOpenConversation(false);
+
+  const handleButtonClick = () => {
+    setIsActiveButton(!isActiveButton);
+  };
+
   return (
-    <Stack width="70%">
+    <Stack width={!isDesktop ? "90%" : "45%"}>
       <Stack
         direction="row"
         justifyContent="space-between"
-        alignContent="center"
         alignItems="center"
         p="10px 0px 0px 14px"
         mb={2.5}
@@ -30,14 +43,20 @@ export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
             sx={{
               height: "20px",
               width: "20px",
+              cursor: "pointer",
             }}
           />
-          <AttachEmailOutlinedIcon
+          <SvgIcon
             sx={{
-              height: "20px",
-              width: "20px",
+              cursor: "pointer",
+              fontSize: "20px",
+              p: 1,
+              backgroundColor: "rgb(239, 243, 244)",
+              borderRadius: "50%",
             }}
-          />
+          >
+            <AttachEmailOutlinedIcon onClick={handleStartConversation} />
+          </SvgIcon>
         </Stack>
       </Stack>
       <TextField
@@ -52,14 +71,12 @@ export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Stack direction="row" justifyContent="center" width="100%">
-                <SearchOutlinedIcon
-                  sx={{
-                    height: "20px",
-                    width: "20px",
-                  }}
-                />
-              </Stack>
+              <SearchOutlinedIcon
+                sx={{
+                  height: "20px",
+                  width: "20px",
+                }}
+              />
             </InputAdornment>
           ),
           sx: {
@@ -72,14 +89,18 @@ export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
         direction="row"
         alignItems="center"
         onClick={() => {
+          handleButtonClick();
           setHideMessagePage(false);
         }}
         sx={{
           height: "55px",
           cursor: "pointer",
           p: "8px 0px 8px 12px",
-          backgroundColor: "rgb(239, 243, 244)",
-          borderRight: "2px solid #1DA1F2",
+          backgroundColor: isActiveButton ? "rgb(239, 243, 244)" : null,
+          borderRight: isActiveButton ? "2px solid #1DA1F2" : null,
+          ":hover": {
+            backgroundColor: isActiveButton ? "rgba(29, 161, 242, 0.1)" : null,
+          },
         }}
       >
         <Avatar src={userTabsInfo.profile_picture} />
@@ -95,6 +116,26 @@ export const UserTabs = ({ userTabsInfo, setHideMessagePage }) => {
           <Typography>Follows you</Typography>
         </Stack>
       </Stack>
+      <Modal open={openConversation} onClose={handleCloseConversation}>
+        <Stack
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "65dvw",
+            height: "65dvh",
+            bgcolor: "background.paper",
+            p: 1.5,
+            border: "none",
+            borderRadius: "15px",
+          }}
+        >
+          <CreateConversation
+            handleCloseConversation={handleCloseConversation}
+          />
+        </Stack>
+      </Modal>
     </Stack>
   );
 };
