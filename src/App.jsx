@@ -1,10 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginScreen from "./LoginAndRegister/LoginScreen";
 import RegisterScreen from "./LoginAndRegister/RegisterScreen";
 import { LoginAuthentication } from "./AuthenticationSystem/LoginAuthentication";
